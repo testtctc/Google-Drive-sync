@@ -26,5 +26,5 @@ python sync.py download --help
 
 
 ## contributor
-tangcheng2014@163.com
-changyuqian924@gmail.com
+- tangcheng2014@163.com
+- changyuqian924@gmail.com

@@ -2,6 +2,7 @@
 import argparse
 from drivesync.upload_to_drive import UploadFiles
 from drivesync.download_from_drive import DownloadFiles
+import drivesync.settings as config
 
 def main():
     parser = argparse.ArgumentParser(description='sync local withe google drive')
@@ -16,13 +17,13 @@ def main():
     parser.add_argument('--not_check_same',
                         help='do not check modified file',action="store_false",default=True)
 
-    parser.add_argument('--parent_folder_id',dest='folder_id',
+    parser.add_argument('--parent_folder_id',dest='folder_id',default='',
                         help=' the folder id of  the parent  of the folder you want sync in google driver ')
 
-    parser.add_argument('--local_abs_path',dest='local_path',
+    parser.add_argument('--local_abs_path',dest='local_path',default='',
                         help='local absolute path')
 
-    parser.add_argument('--folder_name',
+    parser.add_argument('--folder_name',default='',
                         help='the folder name in google driver')
 
 
@@ -49,6 +50,12 @@ def main():
 
     args = parser.parse_args()
 
+    if args.folder_id:
+        config.PARENT_DRIVE_FOLDER_ID = args.folder_id
+    if args.local_path:
+        config.OS_FULL_PATH = args.local_path
+    if args.folder_name:
+        config.DRIVE_FOLDER_NAME = args.folder_name
 
     if args.command =="upload":
         upload =  UploadFiles(do_not_delete_files=args.do_not_delete,
